@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¿Quieres ser mi Valentín?</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #ff758c, #ff7eb3);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.container {
+    background: white;
+    max-width: 380px;
+    margin: 40px auto;
+    padding: 25px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+h1 {
+    color: #ff4d6d;
+}
+
+p {
+    color: #555;
+    font-size: 17px;
+}
+
+.gallery {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    margin: 15px 0;
+}
+
+.gallery img {
+    width: 110px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+
+button {
+    padding: 12px 22px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    margin: 8px;
+    cursor: pointer;
+}
+
+#yesBtn {
+    background: #ff4d6d;
+    color: white;
+}
+
+#noBtn {
+    background: #ccc;
+}
+
+.heart {
+    position: fixed;
+    bottom: -20px;
+    color: red;
+    font-size: 20px;
+    animation: float 5s linear infinite;
+}
+
+@keyframes float {
+    to {
+        transform: translateY(-110vh);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Música -->
+<audio id="music" loop>
+    <source src="mirada.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+
+<h1>💖 Dania Sareth 💖</h1>
+
+<p>
+Desde que vi el poder de tu mirada, supe que eras tú 🥰  
+Desde entonces mi corazón es tuyo 💖  
+<br><br>
+¿Quieres ser mi Valentín?
+</p>
+
+<!-- Fotos -->
+<div class="gallery">
+    <img src="foto1.jpg">
+    <img src="foto2.jpg">
+    <img src="foto3.jpg">
+</div>
+
+<button id="yesBtn">💘 Sí, obvio 💘</button>
+<button id="noBtn">🙄 No</button>
+
+</div>
+
+<script>
+
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const music = document.getElementById("music");
+
+noBtn.addEventListener("touchstart", moveBtn);
+noBtn.addEventListener("mouseover", moveBtn);
+
+function moveBtn() {
+    const x = Math.random() * 200 - 100;
+    const y = Math.random() * 200 - 100;
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+}
+
+yesBtn.addEventListener("click", () => {
+
+    music.play();
+
+    document.body.innerHTML = `
+    <div style="
+        height:100vh;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        background:linear-gradient(to bottom,#ff758c,#ff7eb3);
+        color:white;
+        text-align:center;
+        padding:20px;
+        text-align:center;
+    ">
+        <h1>😍 Te amo 😍</h1>
+
+        <p style="font-size:22px;">
+        Gracias por ser mi Valentín, mi amor 💖<br>
+        Prometo hacerte feliz siempre 💕
+        </p>
+
+        <h2>🌹 Para siempre tú y yo 🌹</h2>
+    </div>
+    `;
+});
+
+function createHeart(){
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random()*100+"vw";
+    heart.style.fontSize = (Math.random()*20+15)+"px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>heart.remove(),5000);
+}
+
+setInterval(createHeart,400);
+
+</script>
+
+</body>
+</html>
